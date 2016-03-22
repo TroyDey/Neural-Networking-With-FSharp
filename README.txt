@@ -1,0 +1,1 @@
+A project to teach myself F# and learn more about Neural Networks by translating code from http://www.heatonresearch.com/book/programming-neural-networks-cs-2.html
