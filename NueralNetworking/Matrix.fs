@@ -22,16 +22,16 @@ type Matrix(inputMatrix:double[,]) =
         | _ -> ()    
 
     let foldiWhile (folder: int -> int -> 'S -> 'T -> 'S) (terminator: int -> int -> 'S -> 'T -> bool) (state: 'S) (array: 'T[,]) =
-        let rec foldiWhile' rowIdx colIdx state (array: 'T[,]) =
+        let rec foldiWhile' rowIdx colIdx state =
             if rowIdx = Array2D.length1 internalArray then
                 state
             elif colIdx = Array2D.length2 internalArray then
-                foldiWhile' (rowIdx+1) 0 state array
+                foldiWhile' (rowIdx+1) 0 state
             elif (terminator rowIdx colIdx state array.[rowIdx,colIdx]) then
                 folder rowIdx colIdx state array.[rowIdx,colIdx]
             else
-                foldiWhile' rowIdx (colIdx+1) (folder rowIdx colIdx state array.[rowIdx,colIdx]) array
-        foldiWhile' 0 0 state array
+                foldiWhile' rowIdx (colIdx+1) (folder rowIdx colIdx state array.[rowIdx,colIdx])
+        foldiWhile' 0 0 state
 
     let inPlaceMap (maper: 'T -> 'T) (array: 'T[,]) =
         let rec inPlaceMap' rowIdx colIdx =
@@ -77,6 +77,16 @@ type Matrix(inputMatrix:double[,]) =
 
     member this.Clone() =
         Matrix(Array2D.copy internalArray)
+
+    member this.foldiMatrix (folder: int -> int -> 'S -> double -> 'S) (state: 'S) (matrix: Matrix) =
+        let rec foldi' rowIdx colIdx state =
+            if rowIdx = Array2D.length1 internalArray then
+                state
+            elif colIdx = Array2D.length2 internalArray then
+                foldi' (rowIdx+1) 0 state
+            else
+                foldi' rowIdx (colIdx+1) (folder rowIdx colIdx state matrix.[rowIdx,colIdx])
+        foldi' 0 0 state
 
     member this.Add(n,m,adden) =
         validateArguments n m                       

@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="MatrixTests.fs" />
+    <Compile Include="MatrixMathTests.fs" />
     <None Include="Script.fsx" />
   </ItemGroup>
   <ItemGroup>
