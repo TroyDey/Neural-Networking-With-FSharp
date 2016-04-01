@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NueralNetworking", "NueralNetworking\NueralNetworking.fsproj", "{CDD6D0DF-AFEB-40E1-9BC6-AC61E314873A}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NeuralNetworking", "NueralNetworking\NeuralNetworking.fsproj", "{CDD6D0DF-AFEB-40E1-9BC6-AC61E314873A}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NueralNetworking.UnitTests", "NueralNetworking.UnitTests\NueralNetworking.UnitTests.fsproj", "{72C7763B-0586-4543-9CC8-79748DFD4855}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NeuralNetworking.UnitTests", "NueralNetworking.UnitTests\NeuralNetworking.UnitTests.fsproj", "{72C7763B-0586-4543-9CC8-79748DFD4855}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
