@@ -21,6 +21,28 @@ type MatrixMath() =
 
         doubleFold' 0 0 state
 
+    member this.DeleteCol (matrix:Matrix) deleted = 
+        let foldr i j (state:Matrix) e =
+            if j = deleted then
+                state
+            elif j > deleted then
+                (state.[i,j-1] <- e; state)
+            else
+                (state.[i,j] <- e; state)
+
+        matrix.foldiMatrix foldr (new Matrix(matrix.Rows, matrix.Columns - 1)) matrix
+
+    member this.DeleteRow (matrix:Matrix) deleted = 
+        let foldr i j (state:Matrix) e =
+            if i = deleted then
+                state
+            elif i > deleted then
+                (state.[i-1,j] <- e; state)
+            else
+                (state.[i,j] <- e; state)
+
+        matrix.foldiMatrix foldr (new Matrix(matrix.Rows - 1, matrix.Columns)) matrix
+
     member this.Add(augend:Matrix, addend:Matrix) =
         let folder i j (state:Matrix) elementOne elementTwo = (state.[i,j] <- elementOne + elementTwo; state)
 
@@ -31,10 +53,16 @@ type MatrixMath() =
 
         doubleFold folder (new Matrix(minuend.Rows, minuend.Columns)) minuend subtrahend
 
-    member this.MultiplyScalar multiplicand (multiplier:double) = raise (NotImplementedException "MultiplyScalar")
-    member this.Multiply multiplicand (multiplier:Matrix) = raise (NotImplementedException "Multiply")
-    member this.Divide dividend divisor = raise (NotImplementedException "Divide")
-    member this.DotProduct a b = raise (NotImplementedException "DotProduct")
+    member this.MultiplyByScalar (multiplicand:Matrix) (multiplier:double) = 
+        multiplicand.foldiMatrix (fun i j (state:Matrix) e -> (state.[i,j] <- e * multiplier; state)) (new Matrix(multiplicand.Rows, multiplicand.Columns)) multiplicand
+
+    member this.Multiply (multiplicand:Matrix) (multiplier:Matrix) = raise (NotImplementedException "Multiply")
+
+    member this.DivideByScalar (dividend:Matrix) divisor =
+        dividend.foldiMatrix (fun i j (state:Matrix) e -> (state.[i,j] <- e / divisor; state)) (new Matrix(dividend.Rows, dividend.Columns)) dividend
+
+    member this.DotProduct a b = 
+        doubleFold (fun i j state elementOne elementTwo -> state + (elementOne * elementTwo)) 0.0 a b
 
     member this.Transpose(matrix:Matrix) =
         let folder i j (state:Matrix) element = (state.[j,i] <- element; state)

@@ -18,7 +18,7 @@ module MatrixMathTests =
         let testMatrixTwo = new Matrix(3,3)
 
         [<TestInitialize>]
-        member x.setup() =
+        member this.setup() =
             testMatrixOne.[0,0] <- 0.0
             testMatrixOne.[0,1] <- 1.0
             testMatrixOne.[0,2] <- 2.0
@@ -40,7 +40,7 @@ module MatrixMathTests =
             testMatrixTwo.[2,2] <- 18.0                     
 
         [<TestMethod>]
-        member x.add_GivenValidArguments_ReturnsMatrixThatIsTheSumOfTheInputs() =            
+        member this.add_GivenValidArguments_ReturnsMatrixThatIsTheSumOfTheInputs() =            
             let expectedResults = new Matrix(3,3)
             expectedResults.[0,0] <- 0.0
             expectedResults.[0,1] <- 11.0
@@ -57,7 +57,7 @@ module MatrixMathTests =
             Assert.AreEqual(expectedResults, result)
 
         [<TestMethod>]
-        member x.subtract_GivenValidArguments_ReturnsMatrixThatIsTheDifferenceOfTheInputs() =            
+        member this.subtract_GivenValidArguments_ReturnsMatrixThatIsTheDifferenceOfTheInputs() =            
             let expectedResults = new Matrix(3,3)
             expectedResults.[0,0] <- 0.0
             expectedResults.[0,1] <- 9.0
@@ -74,7 +74,7 @@ module MatrixMathTests =
             Assert.AreEqual(expectedResults, result)
 
         [<TestMethod>]
-        member x.transpose_GivenValidArguments_ReturnsMatrixThatIsTheTranspositionOfTheInput() =            
+        member this.transpose_GivenValidArguments_ReturnsMatrixThatIsTheTranspositionOfTheInput() =            
             let expectedResults = new Matrix(3,3)
             expectedResults.[0,0] <- 0.0
             expectedResults.[0,1] <- 3.0
@@ -91,7 +91,7 @@ module MatrixMathTests =
             Assert.AreEqual(expectedResults, result)
 
         [<TestMethod>]
-        member x.identity_GivenValidArguments_ReturnsIdentityMatrixOfTheGivenSize() =            
+        member this.identity_GivenValidArguments_ReturnsIdentityMatrixOfTheGivenSize() =            
             let expectedResults = new Matrix(3,3)
             expectedResults.[0,0] <- 1.0
             expectedResults.[0,1] <- 0.0
@@ -104,5 +104,75 @@ module MatrixMathTests =
             expectedResults.[2,2] <- 1.0
 
             let result = sut.Identity(3)
+
+            Assert.AreEqual(expectedResults, result)
+
+        [<TestMethod>]
+        member this.MultiplyByScalar_GivenValidArguments_ReturnsMatrixThatIsMultipliedByScalar() =
+            let expectedResults = new Matrix(3,3)
+            expectedResults.[0,0] <- 0.0
+            expectedResults.[0,1] <- 2.0
+            expectedResults.[0,2] <- 4.0
+            expectedResults.[1,0] <- 6.0
+            expectedResults.[1,1] <- 8.0
+            expectedResults.[1,2] <- 10.0
+            expectedResults.[2,0] <- 12.0
+            expectedResults.[2,1] <- 14.0
+            expectedResults.[2,2] <- 16.0
+
+            let result = sut.MultiplyByScalar testMatrixOne 2.0
+
+            Assert.AreEqual(expectedResults, result)
+
+        [<TestMethod>]
+        member this.DotProduct_GivenValidArguments_ReturnsTheDotProductOfTheGivenMatricies() =
+            let expectedResults = 563.0
+
+            let result = sut.DotProduct testMatrixOne testMatrixTwo
+
+            Assert.AreEqual(expectedResults, result)
+
+        [<TestMethod>]
+        member this.DivideByScalar_GivenValidArguments_ReturnsMatrixThatIsDividedByScalar() =
+            let expectedResults = new Matrix(3,3)
+            expectedResults.[0,0] <- 0.0
+            expectedResults.[0,1] <- 0.5
+            expectedResults.[0,2] <- 1.0
+            expectedResults.[1,0] <- 1.5
+            expectedResults.[1,1] <- 2.0
+            expectedResults.[1,2] <- 2.5
+            expectedResults.[2,0] <- 3.0
+            expectedResults.[2,1] <- 3.5
+            expectedResults.[2,2] <- 4.0
+
+            let result = sut.DivideByScalar testMatrixOne 2.0
+
+            Assert.AreEqual(expectedResults, result)
+
+        [<TestMethod>]
+        member this.DeleteRow_GivenValidArguments_ReturnsNewMatrixWithoutTheIndicatedRow() =
+            let expectedResults = new Matrix(2,3)
+            expectedResults.[0,0] <- 3.0
+            expectedResults.[0,1] <- 4.0
+            expectedResults.[0,2] <- 5.0
+            expectedResults.[1,0] <- 6.0
+            expectedResults.[1,1] <- 7.0
+            expectedResults.[1,2] <- 8.0
+
+            let result = sut.DeleteRow testMatrixOne 0
+
+            Assert.AreEqual(expectedResults, result)
+
+        [<TestMethod>]
+        member this.DeleteCol_GivenValidArguments_ReturnsNewMatrixWithoutTheIndicatedColumn() =
+            let expectedResults = new Matrix(3,2)
+            expectedResults.[0,0] <- 0.0            
+            expectedResults.[0,1] <- 2.0
+            expectedResults.[1,0] <- 3.0            
+            expectedResults.[1,1] <- 5.0
+            expectedResults.[2,0] <- 6.0            
+            expectedResults.[2,1] <- 8.0
+
+            let result = sut.DeleteCol testMatrixOne 1
 
             Assert.AreEqual(expectedResults, result)
