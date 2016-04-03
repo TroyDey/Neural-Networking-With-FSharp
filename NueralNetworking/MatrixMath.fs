@@ -1,6 +1,7 @@
 ﻿module MatrixMath
 
 open System
+open System.Threading.Tasks
 open MatrixError
 open Matrix
 
@@ -56,7 +57,21 @@ type MatrixMath() =
     member this.MultiplyByScalar (multiplicand:Matrix) (multiplier:double) = 
         multiplicand.foldiMatrix (fun i j (state:Matrix) e -> (state.[i,j] <- e * multiplier; state)) (new Matrix(multiplicand.Rows, multiplicand.Columns)) multiplicand
 
-    member this.Multiply (multiplicand:Matrix) (multiplier:Matrix) = raise (NotImplementedException "Multiply")
+    member this.Multiply (multiplicand:Matrix) (multiplier:Matrix) =
+        if multiplicand.Rows <> multiplier.Columns then
+            raise (MatrixError "The multiplicand must have a number of rows equal to the number of columns in the multiplier.")
+
+        let rowsA, colsA = multiplicand.Rows, multiplicand.Columns
+        let rowsB, colsB = multiplier.Rows, multiplier.Columns
+        let result = new Matrix(multiplicand.Rows, multiplier.Columns)
+
+        Parallel.For(0, rowsA, (fun i ->
+            for j = 0 to colsB - 1 do
+                for k = 0 to colsA - 1 do
+                    result.[i,j] <- result.[i,j] + multiplicand.[i,k] * multiplier.[k,j]))  
+        |> ignore
+
+        result
 
     member this.DivideByScalar (dividend:Matrix) divisor =
         dividend.foldiMatrix (fun i j (state:Matrix) e -> (state.[i,j] <- e / divisor; state)) (new Matrix(dividend.Rows, dividend.Columns)) dividend

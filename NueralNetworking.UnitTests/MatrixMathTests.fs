@@ -176,3 +176,20 @@ module MatrixMathTests =
             let result = sut.DeleteCol testMatrixOne 1
 
             Assert.AreEqual(expectedResults, result)
+
+        [<TestMethod>]
+        member this.Multiply_GivenValidArguments_ReturnsMatrixThatIsProductOfTheGivenMatricies() =
+            let expectedResults = new Matrix(3,3)
+            expectedResults.[0,0] <- 45.0
+            expectedResults.[0,1] <- 48.0
+            expectedResults.[0,2] <- 51.0
+            expectedResults.[1,0] <- 132.0
+            expectedResults.[1,1] <- 171.0
+            expectedResults.[1,2] <- 186.0
+            expectedResults.[2,0] <- 219.0
+            expectedResults.[2,1] <- 294.0
+            expectedResults.[2,2] <- 321.0
+
+            let result = sut.Multiply testMatrixOne testMatrixTwo
+
+            Assert.AreEqual(expectedResults, result)
