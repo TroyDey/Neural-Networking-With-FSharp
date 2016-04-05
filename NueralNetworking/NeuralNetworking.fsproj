@@ -48,9 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="BoundNumbers.fs" />
     <Compile Include="MatrixError.fs" />
     <Compile Include="Matrix.fs" />
     <Compile Include="MatrixMath.fs" />
+    <Compile Include="NeuralNetworkError.fs" />
+    <Compile Include="ActivationFunctions.fs" />
+    <Compile Include="FeedForwardLayer.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>

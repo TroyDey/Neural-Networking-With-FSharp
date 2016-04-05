@@ -19,7 +19,7 @@ type Matrix(inputMatrix:double[,]) =
         | _ when rowIdx >= Array2D.length1 internalArray -> raise (MatrixError "Row index cannot be greater than or equal to the number of rows")
         | _ when colIdx >= Array2D.length2 internalArray -> raise (MatrixError "Column index cannot be greater than or equal to the number of columns")
         | _ when colIdx < 0 -> raise (MatrixError "Column index cannot be less than 0")
-        | _ -> ()    
+        | _ -> ()
 
     let foldiWhile (folder: int -> int -> 'S -> 'T -> 'S) (terminator: int -> int -> 'S -> 'T -> bool) (state: 'S) (array: 'T[,]) =
         let rec foldiWhile' rowIdx colIdx state =
