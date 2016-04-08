@@ -6,14 +6,11 @@ open Microsoft.VisualStudio.TestTools.UnitTesting
 module MatrixMathTests =
     open System
     open Matrix
-    open MatrixError
-    open MatrixMath
+    open MatrixError    
 
     //TODO: Need more tests for add, subtract, transpose, and Identity
     [<TestClass>]
-    type testrun() =
-        let sut = new MatrixMath()
-
+    type testrun() =        
         let testMatrixOne = new Matrix(3,3)
         let testMatrixTwo = new Matrix(3,3)
 
@@ -52,7 +49,7 @@ module MatrixMathTests =
             expectedResults.[2,1] <- 24.0
             expectedResults.[2,2] <- 26.0
 
-            let result = sut.Add(testMatrixOne, testMatrixTwo)
+            let result = MatrixMath.Add(testMatrixOne, testMatrixTwo)
 
             Assert.AreEqual(expectedResults, result)
 
@@ -69,7 +66,7 @@ module MatrixMathTests =
             expectedResults.[2,1] <- 10.0
             expectedResults.[2,2] <- 10.0
 
-            let result = sut.Subtract(testMatrixTwo, testMatrixOne)
+            let result = MatrixMath.Subtract(testMatrixTwo, testMatrixOne)
 
             Assert.AreEqual(expectedResults, result)
 
@@ -86,7 +83,7 @@ module MatrixMathTests =
             expectedResults.[2,1] <- 5.0
             expectedResults.[2,2] <- 8.0
 
-            let result = sut.Transpose(testMatrixOne)
+            let result = MatrixMath.Transpose(testMatrixOne)
 
             Assert.AreEqual(expectedResults, result)
 
@@ -103,7 +100,7 @@ module MatrixMathTests =
             expectedResults.[2,1] <- 0.0
             expectedResults.[2,2] <- 1.0
 
-            let result = sut.Identity(3)
+            let result = MatrixMath.Identity(3)
 
             Assert.AreEqual(expectedResults, result)
 
@@ -120,7 +117,7 @@ module MatrixMathTests =
             expectedResults.[2,1] <- 14.0
             expectedResults.[2,2] <- 16.0
 
-            let result = sut.MultiplyByScalar testMatrixOne 2.0
+            let result = MatrixMath.MultiplyByScalar testMatrixOne 2.0
 
             Assert.AreEqual(expectedResults, result)
 
@@ -128,7 +125,7 @@ module MatrixMathTests =
         member this.DotProduct_GivenValidArguments_ReturnsTheDotProductOfTheGivenMatricies() =
             let expectedResults = 563.0
 
-            let result = sut.DotProduct testMatrixOne testMatrixTwo
+            let result = MatrixMath.DotProduct testMatrixOne testMatrixTwo
 
             Assert.AreEqual(expectedResults, result)
 
@@ -145,7 +142,7 @@ module MatrixMathTests =
             expectedResults.[2,1] <- 3.5
             expectedResults.[2,2] <- 4.0
 
-            let result = sut.DivideByScalar testMatrixOne 2.0
+            let result = MatrixMath.DivideByScalar testMatrixOne 2.0
 
             Assert.AreEqual(expectedResults, result)
 
@@ -159,7 +156,7 @@ module MatrixMathTests =
             expectedResults.[1,1] <- 7.0
             expectedResults.[1,2] <- 8.0
 
-            let result = sut.DeleteRow testMatrixOne 0
+            let result = MatrixMath.DeleteRow testMatrixOne 0
 
             Assert.AreEqual(expectedResults, result)
 
@@ -173,7 +170,7 @@ module MatrixMathTests =
             expectedResults.[2,0] <- 6.0            
             expectedResults.[2,1] <- 8.0
 
-            let result = sut.DeleteCol testMatrixOne 1
+            let result = MatrixMath.DeleteCol testMatrixOne 1
 
             Assert.AreEqual(expectedResults, result)
 
@@ -190,6 +187,6 @@ module MatrixMathTests =
             expectedResults.[2,1] <- 294.0
             expectedResults.[2,2] <- 321.0
 
-            let result = sut.Multiply testMatrixOne testMatrixTwo
+            let result = MatrixMath.Multiply testMatrixOne testMatrixTwo
 
             Assert.AreEqual(expectedResults, result)

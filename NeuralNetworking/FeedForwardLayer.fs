@@ -54,12 +54,11 @@ type FeedForwardLayer(activationFunction:IActivationFunction, neuronCount) =
         if pattern <> null then
             Array.mapi (fun i e -> this.SetOutputAtIndex i e) pattern |> ignore
         
-        let inputMatrix = this.CreateInputMatrix(this.Output.Value)
-        let matrixMath = new MatrixMath()        
+        let inputMatrix = this.CreateInputMatrix(this.Output.Value)        
 
         for i = 0 to nextLayer.Value.NeuronCount do
             let col = weightMatrix.Value.GetCol i
-            let sum = matrixMath.DotProduct col inputMatrix
+            let sum = MatrixMath.DotProduct col inputMatrix
 
             this.NextLayer.Value.SetOutputAtIndex i (this.ActivationFunction.ActivationFunction sum)
             
