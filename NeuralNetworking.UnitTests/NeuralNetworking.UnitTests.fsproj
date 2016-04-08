@@ -52,7 +52,7 @@
     <None Include="Script.fsx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NueralNetworking\NeuralNetworking.fsproj">
+    <ProjectReference Include="..\NeuralNetworking\NeuralNetworking.fsproj">
       <Name>NeuralNetworking</Name>
       <Project>{cdd6d0df-afeb-40e1-9bc6-ac61e314873a}</Project>
       <Private>True</Private>
