@@ -55,6 +55,8 @@
     <Compile Include="NeuralNetworkError.fs" />
     <Compile Include="ActivationFunctions.fs" />
     <Compile Include="FeedForwardLayer.fs" />
+    <Compile Include="BackpropagationLayer.fs" />
+    <Compile Include="Backpropagation.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>

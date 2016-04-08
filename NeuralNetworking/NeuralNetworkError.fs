@@ -1,4 +1,4 @@
-﻿module NeuralNetworkError
+﻿namespace NeuralNet.FeedForward
 
 open System
 

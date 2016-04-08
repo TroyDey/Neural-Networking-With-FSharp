@@ -1,7 +1,7 @@
 ﻿module ActivationFunctions
 
 open System
-open NeuralNetworkError
+open NeuralNet.FeedForward
 
 type IActivationFunction =
     abstract member ActivationFunction : double -> double

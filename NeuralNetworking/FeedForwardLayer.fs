@@ -1,9 +1,7 @@
-﻿module FeedForwardNeuralNet
+﻿namespace NeuralNet.FeedForward
 
 open System
-open MatrixError
 open Matrix
-open MatrixMath
 open ActivationFunctions
 
 type FeedForwardLayer(activationFunction:IActivationFunction, neuronCount) =
@@ -16,6 +14,7 @@ type FeedForwardLayer(activationFunction:IActivationFunction, neuronCount) =
 
     member this.WeightMatrix
         with get() = weightMatrix
+        and set(value) = weightMatrix <- value
 
     member this.NeuronCount
         with get() = neuronCount
